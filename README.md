@@ -18,7 +18,7 @@ urlFragment: eventhub-sdk-type-bindings-with-azure-functions
 
 This sample demonstrates how to use the Azure Functions EventHub SDK-type bindings in Python. The supported SDK types includes EventData.
 
-You can learn more about SDK-type bindings for EventHub in the [SDK-type Bindings for Python Reference](https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-python?tabs=get-started%2Casgi%2Capplication-level&pivots=python-mode-decorators#sdk-type-bindings-preview).
+You can learn more about SDK-type bindings for EventHub in the [SDK-type Bindings for Python Reference](https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-python?tabs=get-started%2Casgi%2Capplication-level&pivots=python-mode-decorators#sdk-type-bindings).
 
 ## Prerequisites
 
@@ -28,9 +28,11 @@ Before running the sample, you need the following:
    
 2. **Azure Functions Core Tools**: Install [Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-python) to run and test functions locally.
 
-3. **Python 3.x**: Ensure [Python 3.9 or later](https://www.python.org/downloads/) is installed on your machine.
+3. **A Supported Version of Python**: Visit the [Supported Python versions page](https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-python?tabs=get-started%2Casgi%2Capplication-level&pivots=python-mode-decorators#supported-python-versions) to learn more. The Azure deployments use Python 3.14, which is currently a preview runtime in Azure Functions.
 
-4. **Azure Storage Account**: Create a [storage account via the Azure Portal](https://docs.microsoft.com/azure/storage/common/storage-account-overview) and get the connection string.
+4. **Azure Developer CLI**: Install the [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd) to provision and deploy the sample.
+
+5. **Azure Storage Account**: For local testing, create a [storage account](https://learn.microsoft.com/azure/storage/common/storage-account-overview) or run Azurite and update `local.settings.json`.
 
 ## Using SDK-type Bindings for EventHub in an Azure Function App
 The code in the sample folder has already been updated to support use of SDK-type bindings for EventHub. Let's walk through the changed files.
@@ -89,13 +91,21 @@ def eventhub_trigger(event: eh.EventData):
 
 ### Deploying to Azure
 
-There are three main ways to deploy this to Azure:
+The repository includes Azure Developer CLI (`azd`) configuration for the function app. From the repository root, sign in and provision the resources and application code:
+
+```
+azd auth login
+azd up
+```
+
+Select a subscription and a region that supports the Flex Consumption plan when prompted. The deployment creates a Python 3.14 Linux Flex Consumption Function App, Event Hubs namespace and hub, managed identity, storage account, Log Analytics workspace, and Application Insights resource. Storage and Event Hubs access use managed identity rather than deployed connection-string secrets.
+
+To deploy code changes without reprovisioning the infrastructure, run `azd deploy`. To delete all resources created for the environment, run `azd down`.
+
+You can also deploy using these other tools:
 
 * [Deploy with the VS Code Azure Functions extension](https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-vs-code-python#publish-the-project-to-azure). 
 * [Deploy with the Azure CLI](https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-python?tabs=azure-cli%2Cbash%2Cbrowser#create-supporting-azure-resources-for-your-function).
-* Deploy with the Azure Developer CLI: After [installing the `azd` tool](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd?tabs=localinstall%2Cwindows%2Cbrew), run `azd up` in the root of the project. You can also run `azd pipeline config` to set up a CI/CD pipeline for deployment.
-
-All approaches will provision a Function App, Storage account (to store the code), and a Log Analytics workspace.
 
 ## Next Steps
-Visit the [SDK-type bindings in Python reference documentation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-python?tabs=get-started%2Casgi%2Capplication-level&pivots=python-mode-decorators#sdk-type-bindings-preview) to learn more about how to use SDK-type bindings in a Python Function App and the [API reference documentation](https://learn.microsoft.com/en-us/python/api/azure-eventhub/azure.eventhub?view=azure-python) to learn more about what you can do with the Azure EventHub library.
+Visit the [SDK-type bindings in Python reference documentation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-python?tabs=get-started%2Casgi%2Capplication-level&pivots=python-mode-decorators#sdk-type-bindings) to learn more about how to use SDK-type bindings in a Python Function App and the [API reference documentation](https://learn.microsoft.com/en-us/python/api/azure-eventhub/azure.eventhub?view=azure-python) to learn more about what you can do with the Azure EventHub library.
