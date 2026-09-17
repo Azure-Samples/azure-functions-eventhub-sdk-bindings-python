@@ -28,9 +28,9 @@ Before running the sample, you need the following:
    
 2. **Azure Functions Core Tools**: Install [Azure Functions Core Tools](https://learn.microsoft.com/en-us/azure/azure-functions/functions-run-local?tabs=windows%2Cisolated-process%2Cnode-v4%2Cpython-v2%2Chttp-trigger%2Ccontainer-apps&pivots=programming-language-python) to run and test functions locally.
 
-3. **A Supported Version of Python**: Visit the [Supported Python versions page](https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-python?tabs=get-started%2Casgi%2Capplication-level&pivots=python-mode-decorators#supported-python-versions) to learn more. The Azure deployments use Python 3.14, which is currently a preview runtime in Azure Functions.
+3. **A Supported Version of Python**: Visit the [Supported Python versions page](https://learn.microsoft.com/azure/azure-functions/functions-reference-python?tabs=get-started%2Casgi%2Capplication-level&pivots=python-mode-decorators#supported-python-versions) to learn more. The Azure deployments use Python 3.14, which is currently a preview runtime in Azure Functions.
 
-4. **Azure Developer CLI**: Install the [Azure Developer CLI](https://learn.microsoft.com/en-us/azure/developer/azure-developer-cli/install-azd) to provision and deploy the sample.
+4. **Azure Developer CLI**: Install the [Azure Developer CLI](https://learn.microsoft.com/azure/developer/azure-developer-cli/install-azd) to provision and deploy the sample.
 
 5. **Azure Storage Account**: For local testing, create a [storage account](https://learn.microsoft.com/azure/storage/common/storage-account-overview) or run Azurite and update `local.settings.json`.
 
@@ -108,4 +108,4 @@ You can also deploy using these other tools:
 * [Deploy with the Azure CLI](https://docs.microsoft.com/en-us/azure/azure-functions/create-first-function-cli-python?tabs=azure-cli%2Cbash%2Cbrowser#create-supporting-azure-resources-for-your-function).
 
 ## Next Steps
-Visit the [SDK-type bindings in Python reference documentation](https://learn.microsoft.com/en-us/azure/azure-functions/functions-reference-python?tabs=get-started%2Casgi%2Capplication-level&pivots=python-mode-decorators#sdk-type-bindings) to learn more about how to use SDK-type bindings in a Python Function App and the [API reference documentation](https://learn.microsoft.com/en-us/python/api/azure-eventhub/azure.eventhub?view=azure-python) to learn more about what you can do with the Azure EventHub library.
+Visit the [SDK-type bindings in Python reference documentation](https://learn.microsoft.com/azure/azure-functions/functions-reference-python?tabs=get-started%2Casgi%2Capplication-level&pivots=python-mode-decorators#sdk-type-bindings) to learn more about how to use SDK-type bindings in a Python Function App and the [API reference documentation](https://learn.microsoft.com/python/api/azure-eventhub/azure.eventhub?view=azure-python) to learn more about what you can do with the Azure EventHub library.
